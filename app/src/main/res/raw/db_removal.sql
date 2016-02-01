@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS searchHistory;
+DROP TABLE IF EXISTS favorite;

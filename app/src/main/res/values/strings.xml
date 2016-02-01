@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">PropertyCross-Week1</string>
+    <string name="main_activity_title">Search properties</string>
+    <string name="option_rent">To Rent</string>
+    <string name="option_buy">To Buy</string>
+    <string name="location_icon">Search using my current location</string>
+    <string name="location_hint">City/Postal Code/Address</string>
+    <string name="search_hint_pulse">Press</string>
+    <string name="search_hint_sentence">to search within you current location</string>
+    <string name="previous_results_title">Recent Searches</string>
+    <string name="results_tab_all">All</string>
+    <string name="results_tab_rent">To Rent</string>
+    <string name="results_tab_sell">For Sale</string>
+    <string name="results_subtitle_text_sale">%.0fm2 for sale</string>
+    <string name="results_subtitle_text_rent">%.0fm2 to rent</string>
+    <string name="results_price">%.0f€</string>
+    <string name="no_results_found">No results found</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="facebook_app_id">1719565601592476</string>
+    <string name="favorites_toolbar_title">Favoritos</string>
+    <string name="main_activity_toolbar_favorite">Favorites</string>
+    <string name="main_activity_toolbar_title">Buscar Viviendas</string>
+    <string name="recent_searches_single_result_subtitle">resultado</string>
+    <string name="recent_searches_multiple_result_subtitle">resultados</string>
+    <string name="recent_searches_no_results">No se han encontrado busquedas recientes</string>
+    <string name="profile_title">User\'s profile</string>
+    <string name="facebook_login_error">Couldn\'t login to Facebook</string>
+    <string name="facebook_login_successful">Facebook login successful</string>
+    <string name="drawer_profile_item">Profile</string>
+    <string name="drawer_favorites_item">Favorites</string>
+
+</resources>

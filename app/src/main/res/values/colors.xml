@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#72a700</color>
+    <color name="colorPrimaryDark">#b7de64</color>
+    <color name="colorAccent">#72a700</color>
+    <color name="colorBackground">#eeeeee</color>
+    <color name="searchTabLayoutTextColor">#FFF</color>
+    <color name="whiteBackground">#fff</color>
+    <color name="resultItemShadowColor">#dfdfdf</color>
+</resources>
