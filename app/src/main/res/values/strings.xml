@@ -29,5 +29,13 @@
     <string name="facebook_login_successful">Facebook login successful</string>
     <string name="drawer_profile_item">Profile</string>
     <string name="drawer_favorites_item">Favorites</string>
+    <string name="profile_user_name">Nombre de usuario</string>
+    <string name="profile_password_label">Contraseña</string>
+    <string name="profile_repeat_password_label">Repite tu contraseña</string>
+    <string name="profile_profile_label">Perfil</string>
+    <string name="profile_profile_opcional_label">(opcional)</string>
+    <string name="profile_name_label">Nombre</string>
+    <string name="profile_surname_label">Apellido</string>
+    <string name="profile_mail_label">Correo electronico</string>
 
 </resources>

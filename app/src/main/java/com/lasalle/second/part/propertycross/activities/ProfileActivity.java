@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.lasalle.second.part.propertycross.R;
+import com.lasalle.second.part.propertycross.fragments.ProfileContentFragment;
 import com.lasalle.second.part.propertycross.fragments.ProfileLoginFragment;
+import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
 
 /**
  * Created by Eduard on 25/01/2016.
@@ -35,7 +37,14 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
 
-        addProfileLoginFragment();
+        if (ApplicationServiceFactory.getInstance(getApplicationContext()).getFacebookService()
+                .isLogged())
+        {
+            addProfileContentFragment();
+        }
+        else {
+            addProfileLoginFragment();
+        }
     }
 
     protected void addProfileLoginFragment() {
@@ -47,6 +56,18 @@ public class ProfileActivity extends AppCompatActivity {
         fragmentTransaction.add(
                 R.id.profile_activity_content,
                 loginFragment);
+        fragmentTransaction.commit();
+    }
+
+    protected void addProfileContentFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction =
+                fragmentManager.beginTransaction();
+
+        ProfileContentFragment contentFragment = new ProfileContentFragment();
+        fragmentTransaction.add(
+                R.id.profile_activity_content,
+                contentFragment);
         fragmentTransaction.commit();
     }
 }
