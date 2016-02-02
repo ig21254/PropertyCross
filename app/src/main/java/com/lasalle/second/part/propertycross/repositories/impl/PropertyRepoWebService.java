@@ -31,7 +31,7 @@ public class PropertyRepoWebService implements PropertyRepo {
 
     protected JSONArray doHttpRequest(final PropertySearch search, final int currentPage) {
         HttpURLConnection c = null;
-        final String completeUrl = VolleyRequestHandler.API_BASE_URL + SEARCH_BASE_URL + currentPage;
+        final String completeUrl = VolleyRequestHandler.API_BASE_URL + SEARCH_BASE_URL;
         JSONArray jsonArray = new JSONArray();
         try {
             URL u = new URL(completeUrl);
