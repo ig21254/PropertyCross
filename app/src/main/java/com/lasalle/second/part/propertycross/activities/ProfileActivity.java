@@ -37,14 +37,14 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerToggle.syncState();
 
-        if (ApplicationServiceFactory.getInstance(getApplicationContext()).getFacebookService()
+        /*if (ApplicationServiceFactory.getInstance(getApplicationContext()).getFacebookService()
                 .isLogged())
-        {
+        {*/
             addProfileContentFragment();
-        }
+        /*}
         else {
             addProfileLoginFragment();
-        }
+        }*/
     }
 
     protected void addProfileLoginFragment() {

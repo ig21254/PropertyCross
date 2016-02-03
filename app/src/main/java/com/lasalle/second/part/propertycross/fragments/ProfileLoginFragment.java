@@ -28,7 +28,6 @@ public class ProfileLoginFragment extends Fragment {
     private TextView info;
     private CallbackManager callbackManager;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_login, container, false);

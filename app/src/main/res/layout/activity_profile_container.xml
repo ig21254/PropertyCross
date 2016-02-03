@@ -21,7 +21,9 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/profile_activity_content"/>
+            android:id="@+id/profile_activity_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"/>
 
         <ListView
             android:id="@+id/navigation_drawer_list"

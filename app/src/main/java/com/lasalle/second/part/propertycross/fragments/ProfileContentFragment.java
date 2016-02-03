@@ -17,6 +17,6 @@ public class ProfileContentFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_content, container, false);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
