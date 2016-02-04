@@ -5,22 +5,28 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.fragments.FavoritesListFragment;
+import com.lasalle.second.part.propertycross.listeners.DrawerItemClickListener;
 
 public class FavoritesContainerActivity extends AppCompatActivity {
 
-    protected int numFavorites;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_container);
 
         addFavoritesListFragment();
-        createToolbar();
+        setupToolbar();
+        createDrawerList();
     }
 
     protected void addFavoritesListFragment() {
@@ -36,12 +42,30 @@ public class FavoritesContainerActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    protected void createToolbar() {
+    private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.favorites_toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setTitle(generateTitle());
         setSupportActionBar(toolbar);
-        CharSequence title = generateTitle();
-        getSupportActionBar().setTitle(title);
+
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.favorites_drawerLayout);
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                this,  mDrawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        mDrawerToggle.syncState();
+    }
+
+    protected void createDrawerList() {
+        ListView drawerListView = (ListView) findViewById(R.id.favorites_navigation_drawer_list);
+        String[] drawerList = DrawerItemClickListener.getItemsList();
+
+        ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, drawerList);
+        drawerListView.setAdapter(listAdapter);
+        DrawerItemClickListener drawerItemClickListener = new DrawerItemClickListener(listAdapter, this);
+        drawerListView.setOnItemClickListener(drawerItemClickListener);
     }
 
     @NonNull
