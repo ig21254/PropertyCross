@@ -16,13 +16,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_user_name"
-                android:id="@+id/user_name" />
+                android:text="@string/profile_user_name" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/user_name_input" />
+                android:id="@+id/profile_username_input" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -39,15 +38,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile_password_label"
-                        android:id="@+id/password_label" />
+                        android:text="@string/profile_password_label"/>
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/password_input"
+                        android:id="@+id/profile_password_input"
                         android:password="false" />
                 </LinearLayout>
 
@@ -60,19 +58,26 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile_repeat_password_label"
-                        android:id="@+id/repeat_password_label" />
+                        android:text="@string/profile_repeat_password_label" />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:ems="10"
-                        android:id="@+id/repeat_password_input"
+                        android:id="@+id/profile_repeat_password_input"
                         android:password="false" />
                 </LinearLayout>
 
             </LinearLayout>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/profile_facebook_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -100,15 +105,13 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="@string/profile_profile_label"
-                            android:id="@+id/profile_label"
                             android:textColor="@color/colorPrimary"
                             android:paddingEnd="2dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/profile_profile_opcional_label"
-                            android:id="@+id/textView" />
+                            android:text="@string/profile_profile_opcional_label" />
 
                     </LinearLayout>
 
@@ -122,27 +125,27 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/name_input" />
+                        android:id="@+id/profile_name_input" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile_surname_label"
-                        android:id="@+id/textView2" />
+                        android:text="@string/profile_surname_label" />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/surname_input" />
+                        android:id="@+id/profile_surname_input" />
 
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/profile_picture_image" />
 
 
             </LinearLayout>
@@ -150,14 +153,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/profile_mail_label"
-                android:id="@+id/textView4" />
+                android:text="@string/profile_mail_label" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/mail_input"
+                android:id="@+id/profile_mail_input"
                 android:inputType="textEmailAddress" />
 
             <View
@@ -170,21 +172,19 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/profile_notifications_label"
-                android:id="@+id/textView3"
                 android:textColor="@color/colorPrimary" />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_notifications_switch"
-                android:id="@+id/switch1"
+                android:id="@+id/profile_notification_switch"
                 android:buttonTint="@color/colorPrimary" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_location_label"
-                android:id="@+id/textView5"
                 android:paddingTop="16dp" />
 
             <LinearLayout
@@ -199,12 +199,12 @@
                     android:clickable="true"
                     android:contentDescription="@string/location_icon"
                     android:layout_gravity="center_vertical"
-                    android:id="@+id/locationIcon"/>
+                    android:id="@+id/profile_locationIcon"/>
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/main_search_edit_text"
+                    android:id="@+id/profile_location_input"
                     android:layout_weight="1"
                     android:hint="@string/location_hint"
                     android:imeOptions="actionSearch"
@@ -223,20 +223,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/profile_seeker_label"
-                    android:id="@+id/textView6" />
+                    android:text="@string/profile_seeker_label" />
 
                 <SeekBar
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/seekBar"
+                    android:id="@+id/profile_radius_seekbar"
                     android:layout_weight="1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1km"
-                    android:id="@+id/textView7" />
+                    android:id="@+id/profile_radius_distance"/>
 
             </LinearLayout>
 
@@ -249,7 +248,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_save_button_text"
-                android:id="@+id/save_button"
+                android:id="@+id/profile_save_button"
                 android:layout_gravity="center_horizontal"
                 style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:textColor="@color/colorPrimary" />

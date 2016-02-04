@@ -12,11 +12,13 @@
     tools:context=".activities.FavoritesContainerActivity">
 
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/favorites_toolbar"
-        android:background="@color/colorPrimary">
-
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/toolBarStyle"
+        android:popupTheme="@style/toolBarStyle">
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

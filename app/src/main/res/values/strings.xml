@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PropertyCross-Week1</string>
+    <string name="app_name">PropertyCross</string>
     <string name="main_activity_title">Search properties</string>
     <string name="option_rent">To Rent</string>
     <string name="option_buy">To Buy</string>
@@ -18,29 +18,30 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="facebook_app_id">1719565601592476</string>
-    <string name="favorites_toolbar_title">Favoritos</string>
+    <string name="favorites_toolbar_title">Favorites</string>
     <string name="main_activity_toolbar_favorite">Favorites</string>
-    <string name="main_activity_toolbar_title">Buscar Viviendas</string>
-    <string name="recent_searches_single_result_subtitle">resultado</string>
-    <string name="recent_searches_multiple_result_subtitle">resultados</string>
-    <string name="recent_searches_no_results">No se han encontrado busquedas recientes</string>
+    <string name="main_activity_toolbar_title">Search Properties</string>
+    <string name="recent_searches_single_result_subtitle">result</string>
+    <string name="recent_searches_multiple_result_subtitle">results</string>
+    <string name="recent_searches_no_results">Couldn\'t find recent searches</string>
     <string name="profile_title">User\'s profile</string>
     <string name="facebook_login_error">Couldn\'t login to Facebook</string>
     <string name="facebook_login_successful">Facebook login successful</string>
     <string name="drawer_profile_item">Profile</string>
     <string name="drawer_favorites_item">Favorites</string>
-    <string name="profile_user_name">Nombre de usuario</string>
-    <string name="profile_password_label">Contraseña</string>
-    <string name="profile_repeat_password_label">Repite tu contraseña</string>
-    <string name="profile_profile_label">Perfil</string>
-    <string name="profile_profile_opcional_label">(opcional)</string>
-    <string name="profile_name_label">Nombre</string>
-    <string name="profile_surname_label">Apellido</string>
-    <string name="profile_mail_label">Correo electronico</string>
-    <string name="profile_notifications_label">Notificaciones</string>
-    <string name="profile_notifications_switch">Recibir notificaciones</string>
-    <string name="profile_location_label">Sobre novedades de tu interés ubicadas en</string>
-    <string name="profile_seeker_label">En un radio de</string>
-    <string name="profile_save_button_text">GUARDA</string>
+    <string name="profile_user_name">User\'s name</string>
+    <string name="profile_password_label">Password</string>
+    <string name="profile_repeat_password_label">Repeat your password</string>
+    <string name="profile_profile_label">Profile</string>
+    <string name="profile_profile_opcional_label">(optional)</string>
+    <string name="profile_name_label">Name</string>
+    <string name="profile_surname_label">Surname</string>
+    <string name="profile_mail_label">Email</string>
+    <string name="profile_notifications_label">Notifications</string>
+    <string name="profile_notifications_switch">Receive notifications</string>
+    <string name="profile_location_label">About new Properties of your interest located in</string>
+    <string name="profile_seeker_label">Inside a radius of</string>
+    <string name="profile_save_button_text">SAVE</string>
+    <string name="profile_save_toast_message">Profile saved</string>
 
 </resources>
