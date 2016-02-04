@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ResultsContainerActivity"/>
+        <activity android:name=".activities.ResultsContainerActivity"
+            android:configChanges="orientation"/>
         <activity android:name=".activities.FavoritesContainerActivity"/>
         <activity android:name=".activities.ProfileActivity"/>
         <activity android:name="com.facebook.FacebookActivity"
