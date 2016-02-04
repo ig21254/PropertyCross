@@ -1,8 +1,5 @@
 package com.lasalle.second.part.propertycross.util;
 
-import android.util.Log;
-
-import com.lasalle.second.part.propertycross.model.Property;
 import com.lasalle.second.part.propertycross.model.User;
 
 import org.json.JSONException;
@@ -26,7 +23,8 @@ public class JSonUserBuilder {
         user.setMail(jsonObject.getString(FACEBOOK_EMAIL));
         user.setPicture(jsonObject.getJSONObject(FACEBOOK_PICTURE).getJSONObject("data").getString("url"));
 
-        Log.d("JSonUserBuilder", user.getPicture());
+        // Log.d("JSonUserBuilder", user.getPicture());
+        // Log.d("JSonUserBuilder", user.getPicture());
 
         return user;
     }

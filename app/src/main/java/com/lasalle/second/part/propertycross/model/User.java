@@ -11,7 +11,7 @@ public class User {
     private String mail;
     private boolean receiveNotifications;
     private String locationAddress;
-    private double locationRadius;
+    private int locationRadius;
     private String picture;
 
     public User() {
@@ -69,11 +69,11 @@ public class User {
         this.receiveNotifications = receiveNotifications;
     }
 
-    public double getLocationRadius() {
+    public int getLocationRadius() {
         return locationRadius;
     }
 
-    public void setLocationRadius(double locationRadius) {
+    public void setLocationRadius(int locationRadius) {
         this.locationRadius = locationRadius;
     }
 

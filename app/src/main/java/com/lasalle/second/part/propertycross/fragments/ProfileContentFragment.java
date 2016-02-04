@@ -71,20 +71,23 @@ public class ProfileContentFragment extends Fragment {
                 ApplicationServiceFactory.getInstance(getContext())
                         .getFacebookService().setAccessToken(loginResult.getAccessToken());
 
-                manageSuccessfulLogin(loginResult);
+                manageSuccessfulLogout();
+                showToast("SUCCESS");
             }
 
             @Override
             public void onCancel() {
+                showToast("CANCEL");
             }
 
             @Override
             public void onError(FacebookException exception) {
+                showToast("ERROR");
             }
         });
     }
 
-    protected void manageSuccessfulLogin(LoginResult loginResult) {
+    protected void manageSuccessfulLogout() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.profile_activity_content, new ProfileLoginFragment());
@@ -112,11 +115,14 @@ public class ProfileContentFragment extends Fragment {
         email.setText(user.getMail());
 
         notifications = (Switch) view.findViewById(R.id.profile_notification_switch);
+        notifications.setChecked(user.isReceiveNotifications());
 
         address = (EditText) view.findViewById(R.id.profile_location_input);
+        address.setText(user.getLocationAddress());
 
         radius = (SeekBar) view.findViewById(R.id.profile_radius_seekbar);
         radius.setMax(10);
+        radius.setProgress(user.getLocationRadius());
         radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
@@ -153,16 +159,14 @@ public class ProfileContentFragment extends Fragment {
     public void onClickSave() {
         User user = ApplicationServiceFactory.getInstance(getContext()).getFacebookService().getUser();
 
-        user.setName(username.getText().toString());
+        user.setUsername(username.getText().toString());
         user.setPassword(password.getText().toString());
         user.setName(name.getText().toString());
-        user.setUsername(surname.getText().toString());
+        user.setSurname(surname.getText().toString());
         user.setMail(email.getText().toString());
         user.setReceiveNotifications(notifications.isChecked());
         user.setLocationAddress(address.getText().toString());
         user.setLocationRadius(radius.getProgress());
-        
-        
     }
 
     protected void showToast(String message) {

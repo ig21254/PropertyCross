@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.lasalle.second.part.propertycross.PropertyCrossApplication;
 import com.lasalle.second.part.propertycross.activities.FavoritesContainerActivity;
+import com.lasalle.second.part.propertycross.activities.MainActivity;
 import com.lasalle.second.part.propertycross.activities.ProfileActivity;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
 import com.lasalle.second.part.propertycross.services.PropertyService;
@@ -20,6 +21,7 @@ import com.lasalle.second.part.propertycross.services.PropertyService;
  */
 public class DrawerItemClickListener implements ListView.OnItemClickListener {
 
+    public static final String SEARCH = "Search";
     public static final String PROFILE = "Profile";
     public static final String FAVORITES = "Favorites";
     public static final int PROFILE_CODE = 12345;
@@ -35,10 +37,16 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String item = (String) listAdapter.getItem(position);
+        Intent intent;
 
         switch (item) {
+            case SEARCH:
+                intent = new Intent(PropertyCrossApplication.getContext(), MainActivity.class);
+                appCompatActivity.startActivityForResult(intent, PROFILE_CODE);
+                break;
+
             case PROFILE:
-                Intent intent = new Intent(PropertyCrossApplication.getContext(), ProfileActivity.class);
+                intent = new Intent(PropertyCrossApplication.getContext(), ProfileActivity.class);
                 appCompatActivity.startActivityForResult(intent, PROFILE_CODE);
                 break;
 
@@ -49,7 +57,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener {
     }
 
     public static String[] getItemsList() {
-        return new String[]{PROFILE, FAVORITES};
+        return new String[]{SEARCH, PROFILE, FAVORITES};
     }
 
     private class AsyncFavoritesSearch extends AsyncTask<Void, Void, Boolean> {

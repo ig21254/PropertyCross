@@ -178,7 +178,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/navigation_drawer_list"
+            android:id="@+id/main_navigation_drawer_list"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_gravity="left|start"

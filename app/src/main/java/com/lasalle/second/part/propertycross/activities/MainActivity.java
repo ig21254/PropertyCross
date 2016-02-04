@@ -328,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     }
 
     protected void createDrawerList() {
-        ListView drawerListView = (ListView) findViewById(R.id.navigation_drawer_list);
+        ListView drawerListView = (ListView) findViewById(R.id.main_navigation_drawer_list);
         String[] drawerList = DrawerItemClickListener.getItemsList();
 
         ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, drawerList);
