@@ -12,6 +12,7 @@ import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.model.Comment;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -94,5 +95,15 @@ public class DetailsCommentsListAdapter extends BaseAdapter {
     private void setViewTitle(View convertView, Comment comment) {
         TextView title = (TextView) convertView.findViewById(R.id.details_comment_title);
         title.setText(comment.getAuthor());
+    }
+
+    public void addComments(String text) {
+        Comment comment = new Comment();
+
+        comment.setAuthor(ownerActivity.getString(R.string.comment_default_author));
+        comment.setText(text);
+        comment.setDate(Calendar.getInstance().getTime());
+
+        commentList.add(0, comment);
     }
 }

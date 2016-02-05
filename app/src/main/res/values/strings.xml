@@ -51,5 +51,6 @@
     <string name="details_add_photo_button_text">Add photo</string>
     <string name="details_send_comment_button_text">Send comment</string>
     <string name="details_lastchecked_on_text">"Last checked on "</string>
+    <string name="comment_default_author">You</string>
 
 </resources>

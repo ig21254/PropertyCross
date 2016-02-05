@@ -26,5 +26,6 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/details_comment_image" />
+        android:id="@+id/details_comment_image"
+        android:adjustViewBounds="true"/>
 </LinearLayout>

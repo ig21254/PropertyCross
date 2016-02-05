@@ -10,7 +10,8 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/flat_sample_image_4"
         android:cropToPadding="false"
-        android:paddingBottom="8dp" />
+        android:paddingBottom="8dp"
+        android:adjustViewBounds="true"/>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -172,6 +173,7 @@
                     android:ems="10"
                     android:id="@+id/details_comment_input"
                     android:imeOptions="actionSearch"
+                    android:singleLine="true"
                     android:hint="@string/details_comment_placeholder" />
 
                 <LinearLayout
