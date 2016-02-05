@@ -43,5 +43,12 @@
     <string name="profile_seeker_label">Inside a radius of</string>
     <string name="profile_save_button_text">SAVE</string>
     <string name="profile_save_toast_message">Profile saved</string>
+    <string name="details_call_text">CALL</string>
+    <string name="details_write_text">WRITE</string>
+    <string name="details_buy_text">BUY</string>
+    <string name="details_comments_title">Comments</string>
+    <string name="details_comment_placeholder">Write your comment</string>
+    <string name="details_add_photo_button_text">Add photo</string>
+    <string name="details_send_comment_button_text">Send comment</string>
 
 </resources>

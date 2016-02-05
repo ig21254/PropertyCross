@@ -1,6 +1,7 @@
 package com.lasalle.second.part.propertycross.model;
 
-import org.json.JSONObject;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by albert.denova on 22/12/15.
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 public class Property {
 
     private String id;
+    private Date lastQuery;
     private String name;
     private boolean rent;
     private String cityName;
@@ -21,6 +23,7 @@ public class Property {
     private float price;
     private String ownerPhoneNumber;
     private boolean favourite;
+    private List<Comment> comments;
 
     public String getId() {
         return id;
@@ -132,5 +135,21 @@ public class Property {
 
     public void setFavourite(boolean favourite) {
         this.favourite = favourite;
+    }
+
+    public Date getLastQuery() {
+        return lastQuery;
+    }
+
+    public void setLastQuery(Date lastQuery) {
+        this.lastQuery = lastQuery;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

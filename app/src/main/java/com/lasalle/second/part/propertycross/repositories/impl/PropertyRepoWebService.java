@@ -7,6 +7,7 @@ import com.lasalle.second.part.propertycross.repositories.PropertyRepo;
 import com.lasalle.second.part.propertycross.util.VolleyRequestHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,6 +18,7 @@ import java.net.URL;
 public class PropertyRepoWebService implements PropertyRepo {
 
     protected static final String SEARCH_BASE_URL = "propiedad/buscar/";
+    protected static final String DETAILS_BASE_URL = "propiedad/";
     private final String PROPERTIES_ARRAY_NODE_NAME = "datos";
     private final String PAGE_NUMBER_NODE_NAME = "page";
     private final String ELEMENTS_PER_PAGE_NODE_NAME = "pageSize";
@@ -26,17 +28,26 @@ public class PropertyRepoWebService implements PropertyRepo {
     @Override
     public JSONArray searchProperties(final PropertySearch search) {
         Log.d(getClass().getName(), "Search Properties");
-        return doHttpRequest(search, 1);
+        try {
+            return doHttpRequest(SEARCH_BASE_URL, "POST").getJSONArray(PROPERTIES_ARRAY_NODE_NAME);
+        } catch (JSONException e) {
+            return new JSONArray();
+        }
     }
 
-    protected JSONArray doHttpRequest(final PropertySearch search, final int currentPage) {
+    @Override
+    public JSONObject searchPropertyDetails(int id) {
+        return doHttpRequest(DETAILS_BASE_URL+id, "GET");
+    }
+
+    protected JSONObject doHttpRequest(String baseUrl, String method) {
         HttpURLConnection c = null;
-        final String completeUrl = VolleyRequestHandler.API_BASE_URL + SEARCH_BASE_URL;
-        JSONArray jsonArray = new JSONArray();
+        final String completeUrl = VolleyRequestHandler.API_BASE_URL + baseUrl;
+        JSONObject jsonObject = new JSONObject();
         try {
             URL u = new URL(completeUrl);
             c = (HttpURLConnection) u.openConnection();
-            c.setRequestMethod("POST");
+            c.setRequestMethod(method);
             c.setRequestProperty("Content-length", "0");
             c.setUseCaches(false);
             c.setAllowUserInteraction(false);
@@ -56,8 +67,7 @@ public class PropertyRepoWebService implements PropertyRepo {
                     }
                     br.close();
 
-                    JSONObject jsonObject = new JSONObject(sb.toString());
-                    jsonArray = jsonObject.getJSONArray(PROPERTIES_ARRAY_NODE_NAME);
+                    jsonObject = new JSONObject(sb.toString());
             }
 
         } catch (Exception ex) {
@@ -72,8 +82,7 @@ public class PropertyRepoWebService implements PropertyRepo {
             }
         }
 
-        Log.d(getClass().getName(), jsonArray.toString());
-        return jsonArray;
+        return jsonObject;
     }
 
 }

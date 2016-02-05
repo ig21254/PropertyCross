@@ -1,8 +1,8 @@
 package com.lasalle.second.part.propertycross.services;
 
-import com.lasalle.second.part.propertycross.listeners.PropertyRepoListener;
-import com.lasalle.second.part.propertycross.listeners.PropertyServiceListener;
 import android.util.Log;
+
+import com.lasalle.second.part.propertycross.listeners.PropertyServiceListener;
 import com.lasalle.second.part.propertycross.model.Property;
 import com.lasalle.second.part.propertycross.model.PropertySearch;
 import com.lasalle.second.part.propertycross.model.SearchHistory;
@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PropertyService {
@@ -29,6 +28,7 @@ public class PropertyService {
     private FavoritesRepoWebService favoritesRepoWebService;
     private PropertySearch lastSearch;
     private List<Property> favorites;
+    private Property lastDetail;
 
     private List<PropertyServiceListener> listeners;
 
@@ -43,8 +43,13 @@ public class PropertyService {
         this.favoritesRepoWebService = favoritesRepoWebService;
         this.lastSearch = new PropertySearch();
         listeners = new ArrayList<>();
+        this.lastDetail = new Property();
     }
 
+
+    /*
+     * Properties Search
+     */
     public List<Property> searchPropertiesCachingResult(PropertySearch currentSearch) {
         Log.d("Prperty Service", "searchPropertiesCachingResult");
         return searchProperties(currentSearch, true);
@@ -175,6 +180,10 @@ public class PropertyService {
         }
     }
 
+
+    /*
+     * Favorites Search
+     */
     public List<Property> searchFavoritesCachingResults() {
         return searchFavorites(true);
     }
@@ -209,6 +218,35 @@ public class PropertyService {
         for (PropertyServiceListener l: listeners) {
             l.onDataLoaded(data);
             Log.d("PropertyService", "NOTIFY");
+        }
+    }
+
+
+
+    /*
+     * Property Details Search
+     */
+    public Property searchPropertyDetailsCachingResult(int id) {
+        Log.d("Prperty Service", "searchPropertiesCachingResult");
+        return searchPropertyDetails(id, true);
+    }
+
+    public Property searchPropertyDetailsWithoutCaching(int id) {
+        return searchPropertyDetails(id, false);
+    }
+
+    private Property searchPropertyDetails(int id, boolean cache) {
+        JSONObject propertyDetailsJsonObject = null;
+        if(propertyDetailsJsonObject == null) {
+            propertyDetailsJsonObject = propertyRepo.searchPropertyDetails(id);
+        }
+
+        try {
+            lastDetail = JSonPropertyBuilder.createPropertyFromDetailsJson(propertyDetailsJsonObject);
+            return lastDetail;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

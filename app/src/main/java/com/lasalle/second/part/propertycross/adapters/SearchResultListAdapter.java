@@ -2,15 +2,25 @@ package com.lasalle.second.part.propertycross.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lasalle.second.part.propertycross.PropertyCrossApplication;
 import com.lasalle.second.part.propertycross.R;
+import com.lasalle.second.part.propertycross.activities.PropertyDetailsActivity;
+import com.lasalle.second.part.propertycross.activities.ResultsContainerActivity;
 import com.lasalle.second.part.propertycross.model.Property;
+import com.lasalle.second.part.propertycross.model.PropertySearch;
+import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
+import com.lasalle.second.part.propertycross.services.PropertyService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +64,7 @@ public class SearchResultListAdapter extends BaseAdapter {
         setViewTitle(convertView, property);
         setViewSubtitle(convertView, property);
         setViewPrice(convertView, property);
+        setOnClickListener(convertView, position);
 
         return convertView;
     }
@@ -100,4 +111,56 @@ public class SearchResultListAdapter extends BaseAdapter {
                 objectList.toArray());
         subtitleTextView.setText(formattedString);
     }
+
+    protected void setOnClickListener(View rowView, final int position) {
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AsyncDetails().execute(position);
+            }
+        });
+    }
+
+    private class AsyncDetails extends AsyncTask<Integer, Void, Boolean> {
+
+        private Context context;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.context = PropertyCrossApplication.getContext();
+        }
+
+        @Override
+        protected Boolean doInBackground(Integer... integers) {
+            PropertyService propertyService = ApplicationServiceFactory.
+                    getInstance(context).getPropertyService();
+            int id;
+            try {
+                id = Integer.parseInt(propertyList.get(integers[0]).getId());
+            } catch (Exception e) {
+                id = -1;
+            }
+            return propertyService.searchPropertyDetailsCachingResult(id) != null;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean hasResults) {
+            super.onPostExecute(hasResults);
+            if(!isCancelled()) {
+                if(!hasResults) {
+                    Toast toast = Toast.makeText(
+                            context,
+                            context.getString(R.string.no_results_found),
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else {
+                    Intent intent = new Intent(context, PropertyDetailsActivity.class);
+                    ownerActivity.startActivity(intent);
+                }
+            }
+        }
+    }
+
 }

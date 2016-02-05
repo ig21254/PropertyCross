@@ -23,8 +23,6 @@ import java.util.List;
 
 public class PropertyRepoFile implements PropertyRepo {
 
-
-
     private Context context;
 
     public PropertyRepoFile(Context context) {
@@ -36,6 +34,11 @@ public class PropertyRepoFile implements PropertyRepo {
         String propertiesString = readStringFromFile(R.raw.rent_property_list_all);
         JSONArray jsonArray = getJsonArrayFromPropertyString(propertiesString);
         return jsonArray;
+    }
+
+    @Override
+    public JSONObject searchPropertyDetails(int id) {
+        return null;
     }
 
     protected String readStringFromFile(int file) {
