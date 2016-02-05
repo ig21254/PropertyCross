@@ -249,4 +249,8 @@ public class PropertyService {
             return null;
         }
     }
+
+    public Property getLastDetail() {
+        return lastDetail;
+    }
 }

@@ -3,20 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/details_photoTitle"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/flat_sample_image_4"
+        android:cropToPadding="false" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/details_photoTitle"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/flat_sample_image_4"
-            android:cropToPadding="false" />
 
         <TextView
             android:layout_width="fill_parent"
