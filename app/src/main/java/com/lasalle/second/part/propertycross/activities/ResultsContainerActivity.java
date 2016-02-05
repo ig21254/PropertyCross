@@ -2,16 +2,14 @@ package com.lasalle.second.part.propertycross.activities;
 
 
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.lasalle.second.part.propertycross.R;
-import com.lasalle.second.part.propertycross.fragments.ProfileContentFragment;
 import com.lasalle.second.part.propertycross.fragments.SearchResultContainerFragment;
-import com.lasalle.second.part.propertycross.fragments.SearchResultListFragment;
 import com.lasalle.second.part.propertycross.fragments.SearchResultMapFragment;
 
 public class ResultsContainerActivity extends AppCompatActivity {
@@ -51,10 +49,6 @@ public class ResultsContainerActivity extends AppCompatActivity {
     }
 
     protected void updateResultListFragment(int orientation) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction =
-                fragmentManager.beginTransaction();
-
         Fragment containerFragment;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             containerFragment = new SearchResultMapFragment();

@@ -1,7 +1,15 @@
 package com.lasalle.second.part.propertycross.activities;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -9,7 +17,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,11 +25,12 @@ import android.widget.TextView;
 import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.adapters.DetailsCommentsListAdapter;
 import com.lasalle.second.part.propertycross.model.Property;
-import com.lasalle.second.part.propertycross.model.PropertySearch;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,9 +39,18 @@ import java.util.Locale;
  */
 public class PropertyDetailsActivity extends AppCompatActivity implements EditText.OnEditorActionListener{
 
+    public static final int TAKE_PHOTO = 2727;
+
     private DetailsCommentsListAdapter detailsCommentsListAdapter;
     private Property property;
-    private ListView listView;
+    private Uri photoLocation;
+
+    // Storage Permissions
+    private static final int REQUEST_EXTERNAL_STORAGE = 13;
+    private String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +66,7 @@ public class PropertyDetailsActivity extends AppCompatActivity implements EditTe
         editText.setOnEditorActionListener(this);
 
         detailsCommentsListAdapter = new DetailsCommentsListAdapter(this, property.getComments());
-        listView = (ListView) findViewById(R.id.details_comments_list);
+        ListView listView = (ListView) findViewById(R.id.details_comments_list);
         listView.setAdapter(detailsCommentsListAdapter);
         listView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -137,5 +154,40 @@ public class PropertyDetailsActivity extends AppCompatActivity implements EditTe
         view.clearFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void CameraClick(View v) {
+        Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        long code = Calendar.getInstance().getTimeInMillis();
+
+        verifyStoragePermissions(this);
+
+        File file = new File(Environment.getExternalStorageDirectory(),
+                code+".jpg");
+        photoLocation = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoLocation);
+        startActivityForResult(intent, TAKE_PHOTO);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == TAKE_PHOTO && resultCode==RESULT_OK){
+            ImageView photo = (ImageView) findViewById(R.id.details_new_photo_view);
+            Log.d("PHOTO", photoLocation.toString());
+            photo.setImageURI(photoLocation);
+        }
+    }
+
+    public void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
     }
 }

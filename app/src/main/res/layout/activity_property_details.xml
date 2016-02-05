@@ -202,18 +202,30 @@
                             android:text="@string/details_add_photo_button_text"
                             android:id="@+id/details_add_photo_button"
                             android:layout_gravity="center_vertical"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:onClick="CameraClick"/>
 
                     </LinearLayout>
 
-                    <Button
+                    <!--Button
                         style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/details_send_comment_button_text"
-                        android:id="@+id/details_send_comment_button" />
+                        android:id="@+id/details_send_comment_button" /-->
                 </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:id="@+id/details_new_photo_view"/>
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <ListView
                 android:layout_width="fill_parent"

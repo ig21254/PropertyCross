@@ -1,5 +1,7 @@
 package com.lasalle.second.part.propertycross.model;
 
+import android.net.Uri;
+
 import java.util.Date;
 
 /**
@@ -9,6 +11,7 @@ public class Comment {
     private String author;
     private Date date;
     private String text;
+    private Uri photo;
 
     public String getAuthor() {
         return author;
@@ -32,5 +35,13 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Uri getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Uri photo) {
+        this.photo = photo;
     }
 }
