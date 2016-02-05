@@ -16,6 +16,7 @@ public class JSonPropertyBuilder {
     public static final String RENT_NODE_NAME = "alquiler";
     public static final String FAVOURITE_NODE_NAME = "favorito";
     public static final String PROPERTY_ID_NODE_NAME = "idPropiedad";
+    public static final String DETAIL_ID_NODE_NAME = "id";
     public static final String LATITUDE_NODE_NAME = "latitud";
     public static final String LONGITUDE_NODE_NAME = "longitud";
     public static final String SQUARE_FOOTAGE_NODE_NAME = "metros";
@@ -75,7 +76,7 @@ public class JSonPropertyBuilder {
     public static Property createPropertyFromDetailsJson(JSONObject jsonObject) throws JSONException {
         Property property = new Property();
 
-        property.setId(jsonObject.getString(PROPERTY_ID_NODE_NAME));
+        property.setId(jsonObject.getString(DETAIL_ID_NODE_NAME));
         property.setRent(jsonObject.getBoolean(RENT_NODE_NAME));
         property.setLastQuery(new Date(jsonObject.getLong(LAST_QUERY_NODE_NAME)));
         property.setCityName(jsonObject.getString(CITY_NAME_NODE_NAME));
