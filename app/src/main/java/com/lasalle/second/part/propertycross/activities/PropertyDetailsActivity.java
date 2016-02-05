@@ -2,14 +2,16 @@ package com.lasalle.second.part.propertycross.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lasalle.second.part.propertycross.R;
+import com.lasalle.second.part.propertycross.adapters.DetailsCommentsListAdapter;
 import com.lasalle.second.part.propertycross.model.Property;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Locale;
  */
 public class PropertyDetailsActivity extends AppCompatActivity {
 
+    private DetailsCommentsListAdapter detailsCommentsListAdapter;
     private Property property;
 
     @Override
@@ -31,6 +34,9 @@ public class PropertyDetailsActivity extends AppCompatActivity {
                 .getPropertyService().getLastDetail();
 
         setInfo();
+        detailsCommentsListAdapter = new DetailsCommentsListAdapter(this, property.getComments());
+        ListView listView = (ListView) findViewById(R.id.details_comments_list);
+        listView.setAdapter(detailsCommentsListAdapter);
     }
 
     private void setInfo() {

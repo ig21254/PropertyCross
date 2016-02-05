@@ -96,6 +96,7 @@ public class JSonPropertyBuilder {
         for (int i=0; i< jsonArray.length(); ++i) {
             commentList.add(createCommentFromJson(jsonArray.getJSONObject(i)));
         }
+        property.setComments(commentList);
 
         return property;
     }

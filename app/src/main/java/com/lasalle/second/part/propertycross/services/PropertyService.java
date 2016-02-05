@@ -227,7 +227,7 @@ public class PropertyService {
      * Property Details Search
      */
     public Property searchPropertyDetailsCachingResult(int id) {
-        Log.d("Prperty Service", "searchPropertiesCachingResult");
+        Log.d("Property Service", "searchPropertiesCachingResult");
         return searchPropertyDetails(id, true);
     }
 

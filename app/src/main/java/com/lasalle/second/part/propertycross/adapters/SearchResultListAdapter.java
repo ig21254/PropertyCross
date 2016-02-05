@@ -9,16 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lasalle.second.part.propertycross.PropertyCrossApplication;
 import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.activities.PropertyDetailsActivity;
-import com.lasalle.second.part.propertycross.activities.ResultsContainerActivity;
 import com.lasalle.second.part.propertycross.model.Property;
-import com.lasalle.second.part.propertycross.model.PropertySearch;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
 import com.lasalle.second.part.propertycross.services.PropertyService;
 
@@ -71,11 +68,18 @@ public class SearchResultListAdapter extends BaseAdapter {
 
     protected void setViewImage(View rowView) {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.search_result_image);
-        if(Math.random() % 2 == 0) {
-            imageView.setImageResource(R.drawable.flat_sample_image);
-        }
-        else {
-            imageView.setImageResource(R.drawable.flat_sample_image_2);
+        switch ((int)(Math.random()*10) % 4) {
+            case 0:
+                imageView.setImageResource(R.drawable.flat_sample_image);
+                break;
+            case 1:
+                imageView.setImageResource(R.drawable.flat_sample_image_2);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.flat_sample_image_3);
+            case 3:
+                imageView.setImageResource(R.drawable.flat_sample_image_4);
+                break;
         }
     }
 
