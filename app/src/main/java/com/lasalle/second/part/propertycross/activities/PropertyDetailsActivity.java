@@ -144,8 +144,13 @@ public class PropertyDetailsActivity extends AppCompatActivity implements EditTe
             String comment = v.getText().toString();
             v.setText("");
 
-            detailsCommentsListAdapter.addComments(comment);
+            ImageView imageView = (ImageView) findViewById(R.id.details_new_photo_view);
+            imageView.setVisibility(View.GONE);
+
+            detailsCommentsListAdapter.addComments(comment, photoLocation);
             detailsCommentsListAdapter.notifyDataSetChanged();
+
+            photoLocation = null;
         }
         return handled;
     }
@@ -175,6 +180,7 @@ public class PropertyDetailsActivity extends AppCompatActivity implements EditTe
             ImageView photo = (ImageView) findViewById(R.id.details_new_photo_view);
             Log.d("PHOTO", photoLocation.toString());
             photo.setImageURI(photoLocation);
+            photo.setVisibility(View.VISIBLE);
         }
     }
 

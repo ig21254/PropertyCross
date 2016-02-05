@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:id="@+id/details_comment_input"
-                    android:imeOptions="actionSearch"
+                    android:imeOptions="actionSend"
                     android:singleLine="true"
                     android:hint="@string/details_comment_placeholder" />
 

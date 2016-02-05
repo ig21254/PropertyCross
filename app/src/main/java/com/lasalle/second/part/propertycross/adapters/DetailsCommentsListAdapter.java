@@ -1,6 +1,7 @@
 package com.lasalle.second.part.propertycross.adapters;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,8 @@ public class DetailsCommentsListAdapter extends BaseAdapter {
 
         setViewTitle(convertView, comment);
         setViewDate(convertView, comment);
-        setViewImage(convertView);
-        setViewText(convertView,comment);
+        setViewImage(convertView, comment);
+        setViewText(convertView, comment);
 
         return convertView;
     }
@@ -75,20 +76,25 @@ public class DetailsCommentsListAdapter extends BaseAdapter {
         commentDate.setText(sdf.format(comment.getDate()));
     }
 
-    private void setViewImage(View convertView) {
+    private void setViewImage(View convertView, Comment comment) {
         ImageView imageView = (ImageView) convertView.findViewById(R.id.details_comment_image);
-        switch ((int)(Math.random()*10) % 4) {
-            case 0:
-                imageView.setImageResource(R.drawable.flat_sample_image);
-                break;
-            case 1:
-                imageView.setImageResource(R.drawable.flat_sample_image_2);
-                break;
-            case 2:
-                imageView.setImageResource(R.drawable.flat_sample_image_3);
-            case 3:
-                imageView.setImageResource(R.drawable.flat_sample_image_4);
-                break;
+        if (comment.getPhoto() == null) {
+            switch ((int) (Math.random() * 10) % 4) {
+                case 0:
+                    imageView.setImageResource(R.drawable.flat_sample_image);
+                    break;
+                case 1:
+                    imageView.setImageResource(R.drawable.flat_sample_image_2);
+                    break;
+                case 2:
+                    imageView.setImageResource(R.drawable.flat_sample_image_3);
+                case 3:
+                    imageView.setImageResource(R.drawable.flat_sample_image_4);
+                    break;
+            }
+        }
+        else {
+            imageView.setImageURI(comment.getPhoto());
         }
     }
 
@@ -97,12 +103,13 @@ public class DetailsCommentsListAdapter extends BaseAdapter {
         title.setText(comment.getAuthor());
     }
 
-    public void addComments(String text) {
+    public void addComments(String text, Uri photo) {
         Comment comment = new Comment();
 
         comment.setAuthor(ownerActivity.getString(R.string.comment_default_author));
         comment.setText(text);
         comment.setDate(Calendar.getInstance().getTime());
+        comment.setPhoto(photo);
 
         commentList.add(0, comment);
     }
