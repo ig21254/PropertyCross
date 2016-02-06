@@ -18,19 +18,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.clustering.ClusterManager;
 import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.adapters.MapViewAdapter;
 import com.lasalle.second.part.propertycross.model.Property;
+import com.lasalle.second.part.propertycross.model.PropertyClusterItem;
 import com.lasalle.second.part.propertycross.model.PropertySearch;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
 import com.lasalle.second.part.propertycross.services.PropertyService;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class SearchResultMapFragment extends Fragment implements
         OnMapReadyCallback,
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnCameraChangeListener {
+
+    private ClusterManager<PropertyClusterItem> clusterManager;
 
 
     @Override
@@ -60,11 +65,27 @@ public class SearchResultMapFragment extends Fragment implements
                 new LatLng(41.450961, 2.22801));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
 
+        clusterManager = new ClusterManager<>(getActivity(), googleMap);
+        googleMap.setOnCameraChangeListener(clusterManager);
+        googleMap.setOnMarkerClickListener(clusterManager);
+
+        addItemsToClusterManager();
+
         googleMap.addMarker(
                 new MarkerOptions()
                         .position(new LatLng(41.3833, 2.1833)));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
+    }
+
+    private void addItemsToClusterManager() {
+        List<Property> propertyList = ApplicationServiceFactory.getInstance(getContext())
+                .getPropertyService().getLastSearch().getResults();
+
+        for (Property p: propertyList) {
+            PropertyClusterItem pci = new PropertyClusterItem(p);
+            clusterManager.addItem(pci);
+        }
     }
 
     @Override
@@ -74,6 +95,7 @@ public class SearchResultMapFragment extends Fragment implements
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
     }
+
 
 
 }
