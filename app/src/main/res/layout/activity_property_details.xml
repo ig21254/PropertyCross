@@ -3,16 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/details_photoTitle"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/flat_sample_image_4"
-        android:cropToPadding="false"
-        android:paddingBottom="8dp"
-        android:adjustViewBounds="true"/>
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,6 +12,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/details_photoTitle"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/flat_sample_image_4"
+                android:cropToPadding="false"
+                android:paddingBottom="8dp"
+                android:adjustViewBounds="true"/>
 
             <LinearLayout
                 android:orientation="vertical"

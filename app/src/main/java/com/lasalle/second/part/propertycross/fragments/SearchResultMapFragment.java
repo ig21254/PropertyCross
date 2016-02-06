@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,17 +17,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.ClusterManager;
 import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.adapters.MapViewAdapter;
 import com.lasalle.second.part.propertycross.model.Property;
 import com.lasalle.second.part.propertycross.model.PropertyClusterItem;
-import com.lasalle.second.part.propertycross.model.PropertySearch;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
-import com.lasalle.second.part.propertycross.services.PropertyService;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class SearchResultMapFragment extends Fragment implements
@@ -43,6 +39,9 @@ public class SearchResultMapFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mapView = inflater.inflate(R.layout.fragment_search_result_map, container, false);
+
+        ProgressBar progressBar = (ProgressBar) mapView.findViewById(R.id.map_progressBar);
+        progressBar.setVisibility(View.GONE);
 
         final FrameLayout frameLayout = (FrameLayout) mapView.findViewById(R.id.searchLayout);
         final SearchResultMapFragment currentFragment = this;
@@ -80,6 +79,7 @@ public class SearchResultMapFragment extends Fragment implements
                 clusterManager);
         clusterManager.getMarkerCollection().setOnInfoWindowAdapter(mapViewAdapter);
         clusterManager.setRenderer(mapViewAdapter);
+        clusterManager.setOnClusterItemInfoWindowClickListener(mapViewAdapter);
 
         addItemsToClusterManager();
 
