@@ -13,6 +13,8 @@ import android.widget.ListView;
 
 import com.lasalle.second.part.propertycross.R;
 import com.lasalle.second.part.propertycross.adapters.SearchResultListAdapter;
+import com.lasalle.second.part.propertycross.model.Comparators.PropertyDistanceAscComparator;
+import com.lasalle.second.part.propertycross.model.Comparators.PropertyDistanceDescComparator;
 import com.lasalle.second.part.propertycross.model.Comparators.PropertyFootageAscComparator;
 import com.lasalle.second.part.propertycross.model.Comparators.PropertyFootageDescComparator;
 import com.lasalle.second.part.propertycross.model.Comparators.PropertyPriceAscComparator;
@@ -26,13 +28,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class SearchResultListFragment extends Fragment {
-    public static String SORT_INTENT_NAME   = "com.lasalle.propertycross.SORT_CHANGED";
+    public static String SORT_INTENT_NAME = "com.lasalle.propertycross.SORT_CHANGED";
     public static String SORT_ORDER = "NONE";
 
-    public static final String SORT_ORDER_PRICE_ASC  = "PRICE_ASC";
-    public static final String SORT_ORDER_PRICE_DESC = "PRICE_DESC";
-    public static final String SORT_ORDER_FOOTAGE_ASC = "FOOTAGE_ASC";
-    public static final String SORT_ORDER_FOOTAGE_DESC = "FOOTAGE_DESC";
+    public static final String SORT_ORDER_PRICE_ASC     = "PRICE_ASC";
+    public static final String SORT_ORDER_PRICE_DESC    = "PRICE_DESC";
+    public static final String SORT_ORDER_FOOTAGE_ASC   = "FOOTAGE_ASC";
+    public static final String SORT_ORDER_FOOTAGE_DESC  = "FOOTAGE_DESC";
+    public static final String SORT_ORDER_DISTANCE_ASC  = "DISTANCE_ASC";
+    public static final String SORT_ORDER_DISTANCE_DESC = "DISTANCE_DESC";
 
     private BroadcastReceiver broadcastReceiver;
     private boolean rent;
@@ -84,6 +88,12 @@ public class SearchResultListFragment extends Fragment {
                         break;
                     case SORT_ORDER_FOOTAGE_DESC:
                         Collections.sort(results, new PropertyFootageDescComparator());
+                        break;
+                    case SORT_ORDER_DISTANCE_ASC:
+                        Collections.sort(results, new PropertyDistanceAscComparator());
+                        break;
+                    case SORT_ORDER_DISTANCE_DESC:
+                        Collections.sort(results, new PropertyDistanceDescComparator());
                         break;
                 }
                 searchResultListAdapter.notifyDataSetChanged();

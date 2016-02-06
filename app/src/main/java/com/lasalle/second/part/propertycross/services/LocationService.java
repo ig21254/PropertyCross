@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,6 +33,7 @@ public class LocationService implements GoogleApiClient.OnConnectionFailedListen
     private boolean networkEnabled;
     private LocationManager locationManager;
     private boolean updatesEnabled;
+    private Location lastSearchedLocation;
 
     public LocationService(Context context) {
         this.context = context;
@@ -47,6 +50,7 @@ public class LocationService implements GoogleApiClient.OnConnectionFailedListen
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         checkLocationServices();
+        lastSearchedLocation = new Location("");
     }
 
     public void startTrackingLocation() {
@@ -58,7 +62,6 @@ public class LocationService implements GoogleApiClient.OnConnectionFailedListen
             if(!gpsEnabled) {
                 trackerProvider = LocationManager.NETWORK_PROVIDER;
             }
-
 
             locationManager.requestLocationUpdates(trackerProvider, 0, 0, this);
         }
@@ -136,5 +139,24 @@ public class LocationService implements GoogleApiClient.OnConnectionFailedListen
     private boolean hasLocationPermission() {
         return (PackageManager.PERMISSION_GRANTED ==
                 context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION));
+    }
+
+    public void storeGeoAddress() {
+        Geocoder geocoder = new Geocoder(context);
+        String query = ApplicationServiceFactory.getInstance(context).getPropertyService()
+                .getLastSearch().getQuery();
+        try {
+            List<Address> fromLocationName = geocoder.getFromLocationName(query, 1);
+
+            lastSearchedLocation.setLongitude(fromLocationName.get(0).getLongitude());
+            lastSearchedLocation.setLatitude(fromLocationName.get(0).getLatitude());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Location getLastSearchedLocation() {
+        return lastSearchedLocation;
     }
 }

@@ -2,6 +2,7 @@ package com.lasalle.second.part.propertycross.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +34,7 @@ import com.lasalle.second.part.propertycross.listeners.DrawerItemClickListener;
 import com.lasalle.second.part.propertycross.model.PropertySearch;
 import com.lasalle.second.part.propertycross.model.SearchHistory;
 import com.lasalle.second.part.propertycross.services.ApplicationServiceFactory;
+import com.lasalle.second.part.propertycross.services.LocationService;
 import com.lasalle.second.part.propertycross.services.PropertyService;
 
 import java.util.ArrayList;
@@ -120,50 +122,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         locationImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Camera
-/*
-                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(takePicture.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePicture, 1);
-                }
-*/
-                // Gallery
 
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,
-                        "Select Picture"), 1);
-
-                /*
-                On activity result:
-                 if (resultCode == RESULT_OK) {
-                    if (requestCode == SELECT_PICTURE) {
-                        Uri selectedImageUri = data.getData();
-                        selectedImagePath = getPath(selectedImageUri);
-                    }
-                }
-
-                if multiple, put parameter:
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-
-                Handling:
-                if (Intent.ACTION_SEND_MULTIPLE.equals(data.getAction()))
-                        && Intent.hasExtra(Intent.EXTRA_STREAM)) {
-                    // retrieve a collection of selected images
-                    ArrayList<Parcelable> list = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-                    // iterate over these images
-                    if( list != null ) {
-                       for (Parcelable parcel : list) {
-                         Uri uri = (Uri) parcel;
-                         // TODO handle the images one by one here
-                       }
-                   }
-                }
-
-                 */
-
-                /*
                 ApplicationServiceFactory serviceFactory = ApplicationServiceFactory.getInstance(getApplicationContext());
                 LocationService locationService = serviceFactory.getLocationService();
                 Location location = locationService.getLastKnownLocation();
@@ -173,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 else {
                     Toast.makeText(MainActivity.this, locationService.getLastKnownLocationAsAddress(), Toast.LENGTH_SHORT).show();
                 }
-                */
+
             }
         });
     }
@@ -280,7 +239,10 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 }
                 else {
                     updateRecentSearches();
-                    ApplicationServiceFactory.getInstance(getApplicationContext()).getLocationService().stopTrackingLocation();
+                    ApplicationServiceFactory.getInstance(getApplicationContext())
+                            .getLocationService().stopTrackingLocation();
+                    ApplicationServiceFactory.getInstance(getApplicationContext())
+                            .getLocationService().storeGeoAddress();
                     Intent intent = new Intent(context, ResultsContainerActivity.class);
                     startActivity(intent);
                 }

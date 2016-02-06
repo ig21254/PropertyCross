@@ -52,6 +52,12 @@ public class SearchResultContainerFragment extends Fragment {
             } else {
                 SearchResultListFragment.SORT_ORDER = SearchResultListFragment.SORT_ORDER_FOOTAGE_ASC;
             }
+        } else if (item.getItemId() == R.id.search_option_sort_distance) {
+            if (SearchResultListFragment.SORT_ORDER.equals(SearchResultListFragment.SORT_ORDER_DISTANCE_ASC)) {
+                SearchResultListFragment.SORT_ORDER = SearchResultListFragment.SORT_ORDER_DISTANCE_DESC;
+            } else {
+                SearchResultListFragment.SORT_ORDER = SearchResultListFragment.SORT_ORDER_DISTANCE_ASC;
+            }
         }
 
         Intent intent = new Intent(SearchResultListFragment.SORT_INTENT_NAME);
