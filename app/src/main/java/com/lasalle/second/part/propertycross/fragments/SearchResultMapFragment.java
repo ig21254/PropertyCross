@@ -36,6 +36,7 @@ public class SearchResultMapFragment extends Fragment implements
         GoogleMap.OnCameraChangeListener {
 
     private ClusterManager<PropertyClusterItem> clusterManager;
+    private MapViewAdapter mapViewAdapter;
 
 
     @Override
@@ -55,6 +56,7 @@ public class SearchResultMapFragment extends Fragment implements
             }
         });
 
+
         return mapView;
     }
 
@@ -66,14 +68,21 @@ public class SearchResultMapFragment extends Fragment implements
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
 
         clusterManager = new ClusterManager<>(getActivity(), googleMap);
+        googleMap.setInfoWindowAdapter(clusterManager.getMarkerManager());
         googleMap.setOnCameraChangeListener(clusterManager);
         googleMap.setOnMarkerClickListener(clusterManager);
+        googleMap.setOnInfoWindowClickListener(clusterManager);
+
+
+        mapViewAdapter = new MapViewAdapter(getActivity().getLayoutInflater(),
+                getActivity(),
+                googleMap,
+                clusterManager);
+        clusterManager.getMarkerCollection().setOnInfoWindowAdapter(mapViewAdapter);
+        clusterManager.setRenderer(mapViewAdapter);
 
         addItemsToClusterManager();
 
-        googleMap.addMarker(
-                new MarkerOptions()
-                        .position(new LatLng(41.3833, 2.1833)));
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
     }
@@ -86,6 +95,7 @@ public class SearchResultMapFragment extends Fragment implements
             PropertyClusterItem pci = new PropertyClusterItem(p);
             clusterManager.addItem(pci);
         }
+
     }
 
     @Override

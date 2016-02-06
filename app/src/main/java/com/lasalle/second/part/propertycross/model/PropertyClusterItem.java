@@ -20,4 +20,8 @@ public class PropertyClusterItem implements ClusterItem {
     public LatLng getPosition() {
         return position;
     }
+
+    public Property getProperty() {
+        return property;
+    }
 }

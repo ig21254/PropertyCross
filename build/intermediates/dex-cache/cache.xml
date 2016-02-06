@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\Users\Eduard\AndroidStudioProjects\PropertyCrossAndroid\app\build\intermediates\exploded-aar\com.google.maps.android\android-maps-utils\0.4\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="4b1a7fac58cc85b115adee653a10b6300f90951a">
-        <dex dex="C:\Users\Eduard\AndroidStudioProjects\PropertyCrossAndroid\app\build\intermediates\pre-dexed\debug\com.google.maps.android-android-maps-utils-0.4_72fd89fda36ab46d7e6fabc6748904a1f39dfc40.jar" />
-    </item>
-
-</items>
